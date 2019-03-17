@@ -1,0 +1,27 @@
+<!DOCTYPE html5>
+<html>
+    <head>
+        <title>the signup page</title>
+        <link rel="stylesheet" href="login_page_style.css">
+        <script src="signup.js"></script>
+    </head>
+    <body>
+        <div class="back">
+            <h1>XYZ</h1>
+            <div class="login">
+                    <img src="ppicture.png" alt="profile picture" id="img1">
+                    <h2>Signup for an XYZ account</h2>
+                    <div id="loginInfo">
+                            <form action="/signup" method="post">
+                                    <input type="text" class="fields" name="name" placeholder="Full name" autofocus required><br><br>
+                                    <input type="text" class="fields" id="usrname" name="usrname" placeholder="Username" required onblur="check()"><img src="tick.png" id="usrname-tick"><br><br>
+                                    <input type="password" class="fields" name="passwd" placeholder="Password" required><br><br>
+                                    <input type="password" class="fields" name="reppasswd" placeholder="re-enter Password" required><br><br>
+                                    <input type="submit" value="Signup" class="loginbtn"><br><br>
+                             </form>
+                    </div>
+                    
+            </div>
+        </div>
+    </body>
+</html>
