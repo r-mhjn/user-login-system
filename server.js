@@ -4,6 +4,8 @@ const bodyParser=require('body-parser');
 const mongoose=require('mongoose');
 var app=express();
 
+const port=process.env.PORT | 8080;
+
 var uri = require('./config/database');
 
 mongoose.connect(uri, {useNewUrlParser: true});
@@ -18,6 +20,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 require('./app/routes')(app);
 
-app.listen(8080,()=>{
-	console.log('server started on port 8080');
+app.listen(port,()=>{
+	console.log(`server started on port ${port}`);
 });
