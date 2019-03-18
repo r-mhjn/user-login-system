@@ -75,6 +75,12 @@ h2{
     widows: 15px;
 
 }
+#usrname-cross{
+    display: none;
+    height: 15px;
+    widows: 15px;
+
+}
 .fields{
     width: 200px;
     height: 40px;
