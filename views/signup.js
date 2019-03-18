@@ -6,15 +6,14 @@ function check(){
 	xhttp.send(`usrname=${x}`);
 	xhttp.onreadystatechange=()=>{
 		if(xhttp.status === 200){
+			document.getElementById('load').style.display="none";
+			document.getElementById('usrname-tick').style.display="inline-block";
 			if(xhttp.responseText==='ok'){
-				document.getElementById('usrname-tick').style.display="inline-block";
-				document.getElementById('usrname-cross').style.display="none";
+				document.getElementById('usrname-tick').src="tick.png";
+			} else{
+				document.getElementById('usrname-tick').src="cross.png";
 			}
-			else{
-				document.getElementById('usrname-tick').style.display="none";
-				document.getElementById('usrname-cross').style.display="inline-block";
 		}
 	}
-	}
-	console.log('fetching');
+	document.getElementById('load').style.display="inline-block";
 }
