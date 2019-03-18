@@ -10,10 +10,14 @@ function check(){
 			document.getElementById('usrname-tick').style.display="inline-block";
 			if(xhttp.responseText==='ok'){
 				document.getElementById('usrname-tick').src="tick.png";
+				document.getElementById('usrname-tick').title="username available";
 			} else{
 				document.getElementById('usrname-tick').src="cross.png";
+				document.getElementById('usrname-tick').title="username taken";
 			}
 		}
 	}
 	document.getElementById('load').style.display="inline-block";
 }
+
+//TODO: validate form then submit;

@@ -10,9 +10,11 @@ module.exports={
                 if(user.password===req.body.passwd){
                     return next();
                 }else{
+                    console.log('wrong pass');
                     res.redirect('/login');
                 }
             }else{
+                console.log('wrong usrname');
                 return res.redirect('/login');
             }
         });
