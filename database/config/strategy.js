@@ -1,49 +1,56 @@
-var user=require('../models/user.model');
+const User = require('../models/user.model');
 
-module.exports={
+var login = function (body, callback) {
+    const username = body.username;
+    const password = body.password;
 
-    login : (req,res,next)=>{
-        user.findOne({'username':req.body.usrname},(err,user)=>{
-            if(err){
-                console.log('error');
+    User.findOne({ 'username': username })
+        .then(user => {
+            if (user.password === password) {
+                callback(user, undefined);
+            } else {
+                callback(undefined, 'error');
             }
-            if(user){
-                if(user.password===req.body.passwd){
-                    return next();
-                }else{
-                    console.log('wrong pass');
-                    res.redirect('/login');
-                }
-            }else{
-                console.log('wrong usrname');
-                return res.redirect('/login');
-            }
+        })
+        .catch(err => {
+            callback(undefined, err);
         });
-    },
-    signup : (req,res,next)=>{
-        current=new user({
-            username:req.body.usrname,
-            name:req.body.name,
-            password:req.body.passwd
+}
+
+var signup = function (body, callback) {
+    const username = body.username;
+    const password = body.password;
+    const name = body.name;
+    console.log(username,password,name);
+    const newUser = new User({
+        username: username,
+        password: password,
+        name: name,
+    });
+
+    newUser.save()
+        .then(() => {
+            callback(newUser, undefined);
+        })
+        .catch(err => {
+            callback(undefined, err)
         });
-        current.save((err)=>{
-            if(err){
-                console.log('error saving');
-            }
-        });
-        return next();
-    },
-    checkusername : (req,res)=>{
-        res.setHeader('Content-type', 'text/xml');
-        user.findOne({'username':req.body.usrname},(err,usr)=>{
-            if(err){
-                console.log('error');
-            }
-            if(usr){
-                res.send('no');
-            }else{
-                res.send('ok');
-            }
-        });
-    }
+}
+
+var checkusername=function(body,callback){
+    const username=body.username;
+    User.findOne({username:username})
+    .then(user=>{
+        if(user==null){callback(undefined,err)}
+        callback(user,undefined);
+    })
+    .catch(err=>{
+        callback(undefined,err);
+    })
+}
+
+module.exports = {
+    login,
+    signup,
+    checkusername
 }

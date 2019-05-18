@@ -23,6 +23,7 @@ app.set('view engine', 'hbs');
 
 app.use(express.static(__dirname + '/views'));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const usersRouter=require('./routes/users');
 app.use('/',usersRouter);

@@ -1,36 +1,52 @@
 const router = require('express').Router();
 const strategy = require('../database/config/strategy');
 
-var user;
+var currentuser;
 
 //routes
-router.route('/login').get((req, res) => {
-	console.log('login page requested');
-	res.redirect('/login_page.html');
-});
 router.route('/').get((req, res) => {
-	res.redirect('/login');
-});
-router.route('/signup').get((req, res) => {
-	console.log('signup page requested');
-	res.redirect('/signup_page.html');
+	res.redirect('/login.html');
 });
 
-router.route('/login').post(strategy.login, (req, res) => {
-	user = req.body.usrname;
-	res.redirect('/profile');
-});
-router.route('/signup').post(strategy.signup, (req, res) => {
-	user = req.body.usrname;
-	res.redirect('/profile');
+router.route('/login').post((req,res)=>{
+	strategy.login(req.body,(user,err)=>{
+		if(err){
+			//add flash message username.password incorrect
+			res.redirect('/login.html');
+		}else{
+			currentuser=user.username;
+			res.redirect('/profile');
+		}
+	});
 });
 
-router.route('/ajaxcall').post(strategy.checkusername);
+router.route('/signup').post((req, res) => {
+	strategy.signup(req.body,(user,err)=>{
+		if(err){
+			//add flash message
+			res.redirect('/signup.html');
+		}else{
+			currentuser=user.username;
+			res.redirect('/profile');
+		}
+	});
+});
+
+router.route('/ajaxcall').post((req,res)=>{
+	strategy.checkusername(req.body,(user,err)=>{
+		res.setHeader('Content-type', 'text/xml');
+		if(err){
+			res.send('ok');
+		}else{
+			res.send('no');
+		}
+	})
+});
 
 //TODO: check if logged in;
 router.route('/profile').get((req, res) => {
 	res.render('profile.hbs', {
-		username: user
+		username: currentuser
 	});
 });
 
