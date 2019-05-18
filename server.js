@@ -1,25 +1,32 @@
-const express=require('express');
-const hbs=require('hbs');
-const bodyParser=require('body-parser');
-const mongoose=require('mongoose');
-var app=express();
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+//const hbs = require('hbs');
 
-const port=process.env.PORT | 8080;
+var app = express();
 
-var uri = require('./config/database');
+require('dotenv').config();
 
-mongoose.connect(uri, {useNewUrlParser: true});
-mongoose.connection.on('error',()=>{
-    console.error('error connecting to database');
+const port = process.env.PORT | 8080;
+
+var uri = process.env.MONGODB_URI;
+
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
+const connection=mongoose.connection;
+connection.once('open', () => {
+    console.error('connected to mongodb database successfully');
+}).on('error',()=>{
+    console.error('error connecting to the database');
 });
 
-app.set('view engine','hbs');
+app.set('view engine', 'hbs');
 
-app.use(express.static(__dirname+'/views'));
+app.use(express.static(__dirname + '/views'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-require('./app/routes')(app);
 
-app.listen(port,()=>{
-	console.log(`server started on port ${port}`);
+const usersRouter=require('./routes/users');
+app.use('/',usersRouter);
+
+app.listen(port, () => {
+    console.log(`server started on port ${port}`);
 });

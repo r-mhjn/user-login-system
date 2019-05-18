@@ -1,14 +1,14 @@
 body{
-    background-color: rgb(71, 71, 71);
+    background-image: linear-gradient(to bottom right, purple, rgba(0,0,0,0.5));
 }
 h2{
     font-size: 25px;
-    color: white;
+    color: rgb(114, 90, 90);
 }
 .back{
     font-family: Helvetica,Arial;
     font-size: 30px;
-    background-color: rgb(230, 30, 30);
+    background-color: rgba(245, 222, 179, 0.555);
     width: auto;
     height: 900px;
     margin: 20px 10% auto 10%;
@@ -19,17 +19,15 @@ h2{
     position: relative;
     height: 3cm;
     width: 3cm;
-    border: solid rgb(117, 117, 117) 5px;
     border-radius: 50%;
     margin: -65px auto 0 auto; 
 }
 .login{
-    background-color: rgb(46, 46, 46);
+    background-color: rgb(255, 255, 255);
     height: auto;
     width: 400px;
     margin: 60px auto auto auto;
-    border-top: solid rgb(117, 117, 117) 7px;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.329);
 }
 #loginInfo{
@@ -40,21 +38,25 @@ h2{
     color: white;
 }
 .loginbtn{
-    color: white;
-    background: red;
+    color: rgba(128, 0, 128, 0.842);
+    background: white;
     height: 1cm;
     width: 200px;
     margin-top: 15px;
     margin-left: 10%;
     margin-right: 10%;
+    border: 2px solid rgba(128, 0, 128, 0.842);
     border-radius: 20px;
-    border: none;
     font-size: 20px;
     cursor: pointer;
 }
-.loginbtn:hover {background-color: rgb(255, 82, 82)}
+.loginbtn:hover {
+    background-color: rgba(128, 0, 128, 0.562);
+    color: white;
+    border: none;
+}
 .quests{
-    color: rgb(255, 255, 255);
+    color: rgb(100, 92, 76);
     padding-top: 20px;
     padding-left: 20px;
     font-size: 15px;
@@ -84,7 +86,7 @@ h2{
 .fields{
     width: 200px;
     height: 40px;
-    background-color: rgb(46, 46, 46);
+    background-color: rgba(46, 46, 46, 0);
     border: none;
     border-bottom: 5px solid rgb(128, 128, 128);
     font-size: 20;

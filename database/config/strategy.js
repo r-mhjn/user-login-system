@@ -1,6 +1,7 @@
-var user=require('../app/models/user');
+var user=require('../models/user.model');
 
 module.exports={
+
     login : (req,res,next)=>{
         user.findOne({'username':req.body.usrname},(err,user)=>{
             if(err){
