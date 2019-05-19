@@ -16,6 +16,11 @@ node server.js
 - hbs: ^4.0.3
 - dotenv: ^8.0.0
 
+## Dependencies currently being added
+
+- passportJS
+- bcrypt
+- express-session
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
