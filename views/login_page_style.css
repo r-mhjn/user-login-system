@@ -1,12 +1,18 @@
-body{
-    background-image: linear-gradient(to bottom right, purple, rgba(0,0,0,0.5));
+body {
+    background-image: linear-gradient(to bottom right, purple, rgba(0, 0, 0, 0.5));
 }
-h2{
+
+h1 {
+    padding-top: 50px;
+}
+
+h2 {
     font-size: 25px;
     color: rgb(114, 90, 90);
 }
-.back{
-    font-family: Helvetica,Arial;
+
+.back {
+    font-family: Helvetica, Arial;
     font-size: 30px;
     background-color: rgba(245, 222, 179, 0.555);
     width: auto;
@@ -15,14 +21,16 @@ h2{
     text-align: center;
     padding-top: 5px;
 }
-#img1{
+
+#img1 {
     position: relative;
     height: 3cm;
     width: 3cm;
     border-radius: 50%;
-    margin: -65px auto 0 auto; 
+    margin: -65px auto 0 auto;
 }
-.login{
+
+.login {
     background-color: rgb(255, 255, 255);
     height: auto;
     width: 400px;
@@ -30,14 +38,16 @@ h2{
     border-radius: 10px;
     box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.329);
 }
-#loginInfo{
+
+#loginInfo {
     padding-top: 1cm;
     padding-left: 2cm;
     text-align: left;
     font-size: 20px;
     color: white;
 }
-.loginbtn{
+
+.loginbtn {
     color: rgba(128, 0, 128, 0.842);
     background: white;
     height: 1cm;
@@ -50,40 +60,44 @@ h2{
     font-size: 20px;
     cursor: pointer;
 }
+
 .loginbtn:hover {
     background-color: rgba(128, 0, 128, 0.562);
     color: white;
     border: none;
 }
-.quests{
+
+.quests {
     color: rgb(100, 92, 76);
     padding-top: 20px;
     padding-left: 20px;
     font-size: 15px;
-    
     text-decoration: none;
 }
-.quests:hover{
-    color:rgb(179, 179, 179);
+
+.quests:hover {
+    color: rgb(179, 179, 179);
     text-decoration: underline;
 }
-#lol{
+
+#lol {
     text-align: left;
     line-height: 1cm;
 }
-#usrname-tick{
+
+#usrname-tick {
     display: none;
     height: 15px;
     widows: 15px;
-
 }
-#usrname-cross{
+
+#usrname-cross {
     display: none;
     height: 15px;
     widows: 15px;
-
 }
-.fields{
+
+.fields {
     width: 200px;
     height: 40px;
     background-color: rgba(46, 46, 46, 0);
@@ -92,10 +106,12 @@ h2{
     font-size: 20;
     color: rgb(187, 187, 187);
 }
-.fields:focus{
+
+.fields:focus {
     outline: 0;
 }
-.loader{
+
+.loader {
     display: none;
     height: 15px;
     width: 15px;
@@ -104,7 +120,12 @@ h2{
     border-radius: 50%;
     animation: spin 2s linear infinite;
 }
+
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

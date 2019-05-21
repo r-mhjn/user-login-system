@@ -16,12 +16,12 @@ var login = function (username, password, done) {
     User.findOne({ 'username': username })
         .then(user => {
             if (user == null) {
-                return done(null, false, { message: 'user not found' });
+                return done(null, false, { message: 'invalid credentials' });
             }
             if (user.password === password) {
                 done(null, user);
             } else {
-                return done(null, false, { message: 'user not found' });
+                return done(null, false, { message: 'invalid credentials' });
             }
         })
         .catch(err => {
@@ -29,7 +29,7 @@ var login = function (username, password, done) {
         });
 }
 
-var signup = function (req,username, password, done) {
+var signup = function (req, username, password, done) {
     const name = req.body.name;
     console.log(username, password, name);
     const newUser = new User({
@@ -40,10 +40,10 @@ var signup = function (req,username, password, done) {
 
     newUser.save()
         .then(() => {
-            return done(null,newUser);
+            return done(null, newUser);
         })
         .catch(err => {
-            return done(err,false);
+            return done(err, false, { message: 'invalid credentials' });
         });
 }
 

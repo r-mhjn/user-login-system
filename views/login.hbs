@@ -8,7 +8,15 @@
 </head>
 
 <body>
+    <script>
+        setTimeout(() => {
+            document.getElementById('flash-message').style.display = 'none';
+        }, 1500);
+    </script>
     <div class="back">
+        <span id="flash-message" style="position:fixed;color:red;top:50px;font-size:40px">
+            {{{message}}}
+        </span>
         <h1>XYZ</h1>
         <div class="login">
             <img src="ppicture.png" alt="profile picture" id="img1">
@@ -22,7 +30,7 @@
             </div>
             <div id="lol">
                 <a href="#" class="quests">Forgot your password?</a><br>
-                <a href="/signup.html" class="quests">Don't have an account?</a><br><br>
+                <a href="/signup" class="quests">Don't have an account?</a><br><br>
             </div>
         </div>
     </div>

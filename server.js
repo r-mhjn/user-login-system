@@ -3,8 +3,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
-const morgan=require('morgan');
-//const hbs = require('hbs');
+const morgan = require('morgan');
+const flash = require('connect-flash-plus');
 
 var app = express();
 
@@ -25,6 +25,7 @@ connection.once('open', () => {
 app.set('view engine', 'hbs');
 
 app.use(morgan('tiny'));
+app.use(flash());
 app.use(express.static(__dirname + '/views'));
 app.use(session({
     secret: 'meri key',

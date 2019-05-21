@@ -18,11 +18,11 @@ node server.js
 - dotenv *environment variables*
 - passport *authentication*
 - express-session *http sessions*
+- connect-flash-plus *flash messages*
 
 ## Dependencies currently being added
 
 - bcrypt
-- express-flash-messages
 
 ## Contributing
 
