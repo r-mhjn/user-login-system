@@ -13,11 +13,15 @@ router.route('/login').post(passport.authenticate('local-login', {
 	failureRedirect: '/login.html',
 }));
 
-
 router.route('/signup').post(passport.authenticate('local-signup', {
 	successRedirect: '/profile',
 	failureRedirect: '/signup.html'
 }));
+
+router.route('/logout').get((req,res)=>{
+	req.logOut();
+	res.redirect('/');
+})
 
 router.route('/ajaxcall').post((req, res) => {
 	res.setHeader('Content-type', 'text/xml');
