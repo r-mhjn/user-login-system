@@ -1,53 +1,48 @@
 const router = require('express').Router();
-const strategy = require('../database/config/strategy');
+const passport = require('../database/config/strategy');
+const User=require('../database/models/user.model');
 
-var currentuser;
 
 //routes
 router.route('/').get((req, res) => {
 	res.redirect('/login.html');
 });
 
-router.route('/login').post((req,res)=>{
-	strategy.login(req.body,(user,err)=>{
-		if(err){
-			//add flash message username.password incorrect
-			res.redirect('/login.html');
-		}else{
-			currentuser=user.username;
-			res.redirect('/profile');
-		}
-	});
-});
+router.route('/login').post(passport.authenticate('local-login', {
+	successRedirect: '/profile',
+	failureRedirect: '/login.html',
+}));
 
-router.route('/signup').post((req, res) => {
-	strategy.signup(req.body,(user,err)=>{
-		if(err){
-			//add flash message
-			res.redirect('/signup.html');
-		}else{
-			currentuser=user.username;
-			res.redirect('/profile');
-		}
-	});
-});
 
-router.route('/ajaxcall').post((req,res)=>{
-	strategy.checkusername(req.body,(user,err)=>{
-		res.setHeader('Content-type', 'text/xml');
-		if(err){
+router.route('/signup').post(passport.authenticate('local-signup', {
+	successRedirect: '/profile',
+	failureRedirect: '/signup.html'
+}));
+
+router.route('/ajaxcall').post((req, res) => {
+	res.setHeader('Content-type', 'text/xml');
+	const username = req.body.username;
+	User.findOne({ username: username })
+		.then(user => {
+			if (user == null) { res.send('ok'); }
+			else {
+				res.send('no');
+			}
+		})
+		.catch(err => {
 			res.send('ok');
-		}else{
-			res.send('no');
-		}
-	})
+		})
 });
 
-//TODO: check if logged in;
-router.route('/profile').get((req, res) => {
+router.route('/profile').get((req, res, next) => {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+	res.redirect('/');
+}, (req, res) => {
 	res.render('profile.hbs', {
-		username: currentuser
+		username: req.user.username
 	});
 });
 
-module.exports=router;
+module.exports = router;

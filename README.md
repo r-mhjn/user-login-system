@@ -10,18 +10,20 @@ node server.js
 
 ## Dependencies
 
-- body-parser: ^1.18.3
-- express: ^4.16.4
-- mongoose: ^5.4.19
-- hbs: ^4.0.3
-- dotenv: ^8.0.0
+- morgan *logging requests*
+- body-parser *to extract body from req object*
+- express *for server and routing*
+- mongoose *MongoDB ORM*
+- hbs *templating engine*
+- dotenv *environment variables*
+- passport *authentication*
+- express-session *http sessions*
 
 ## Dependencies currently being added
 
-- passportJS
 - bcrypt
-- express-session
 - express-flash-messages
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

@@ -1,27 +1,37 @@
 const User = require('../models/user.model');
+var passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
-var login = function (body, callback) {
-    const username = body.username;
-    const password = body.password;
 
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
+passport.deserializeUser((id, done) => {
+    User.findById(id, (err, user) => {
+        done(err, user);
+    });
+});
+
+var login = function (username, password, done) {
     User.findOne({ 'username': username })
         .then(user => {
+            if (user == null) {
+                return done(null, false, { message: 'user not found' });
+            }
             if (user.password === password) {
-                callback(user, undefined);
+                done(null, user);
             } else {
-                callback(undefined, 'error');
+                return done(null, false, { message: 'user not found' });
             }
         })
         .catch(err => {
-            callback(undefined, err);
+            return done(err);
         });
 }
 
-var signup = function (body, callback) {
-    const username = body.username;
-    const password = body.password;
-    const name = body.name;
-    console.log(username,password,name);
+var signup = function (req,username, password, done) {
+    const name = req.body.name;
+    console.log(username, password, name);
     const newUser = new User({
         username: username,
         password: password,
@@ -30,27 +40,14 @@ var signup = function (body, callback) {
 
     newUser.save()
         .then(() => {
-            callback(newUser, undefined);
+            return done(null,newUser);
         })
         .catch(err => {
-            callback(undefined, err)
+            return done(err,false);
         });
 }
 
-var checkusername=function(body,callback){
-    const username=body.username;
-    User.findOne({username:username})
-    .then(user=>{
-        if(user==null){callback(undefined,err)}
-        callback(user,undefined);
-    })
-    .catch(err=>{
-        callback(undefined,err);
-    })
-}
+passport.use('local-login', new LocalStrategy(login));
+passport.use('local-signup', new LocalStrategy({ passReqToCallback: true }, signup));
 
-module.exports = {
-    login,
-    signup,
-    checkusername
-}
+module.exports = passport;
