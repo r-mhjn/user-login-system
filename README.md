@@ -19,10 +19,11 @@ node server.js
 - passport *authentication*
 - express-session *http sessions*
 - connect-flash-plus *flash messages*
+- bcrypt *password hashing*
 
 ## Dependencies currently being added
 
-- bcrypt
+- **
 
 ## Contributing
 

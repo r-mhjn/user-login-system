@@ -8,10 +8,9 @@ const flash = require('connect-flash-plus');
 
 var app = express();
 
-require('dotenv').config();
-
 const port = process.env.PORT | 8080;
 
+require('dotenv').config();
 var uri = process.env.MONGODB_URI;
 
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });

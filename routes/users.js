@@ -8,24 +8,25 @@ router.route('/').get((req, res) => {
 	res.redirect('/login');
 });
 
-router.route('/login').get((req, res) => {
+router.route('/login').get(userIsAuthenticated, (req, res) => {
 	res.render('login', {
 		message: req.flash('error')
 	});
 });
-router.route('/signup').get((req, res) => {
+
+router.route('/signup').get(userIsAuthenticated, (req, res) => {
 	res.render('signup', {
 		message: req.flash('error')
 	});
 });
 
-router.route('/login').post(passport.authenticate('local-login', {
+router.route('/login').post(userIsAuthenticated, passport.authenticate('local-login', {
 	successRedirect: '/profile',
 	failureRedirect: '/login',
 	failureFlash: true
 }));
 
-router.route('/signup').post(passport.authenticate('local-signup', {
+router.route('/signup').post(userIsAuthenticated, passport.authenticate('local-signup', {
 	successRedirect: '/profile',
 	failureRedirect: '/signup',
 	failureFlash: true
@@ -61,5 +62,13 @@ router.route('/profile').get((req, res, next) => {
 		username: req.user.username
 	});
 });
+
+function userIsAuthenticated(req, res, next) {
+	if (req.isAuthenticated()) {
+		res.redirect('/profile');
+	} else {
+		next();
+	}
+}
 
 module.exports = router;
