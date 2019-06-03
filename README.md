@@ -4,7 +4,7 @@ A basic user login system created with NodeJS and MongoDB.
 
 ## Installation
 
-Use the package manager npm to install ExerTracker.
+Use the package manager npm to install all the dependencies.
 
 In the root folder
 
@@ -14,7 +14,7 @@ npm install
 
 ### Environment variables required
 
-- ATLAS_URI *(MongoDB Atlas URI)*
+- MONGODB_URI *(MongoDB URI)*
 - PORT *(port no.)*
 
 ## Usage
