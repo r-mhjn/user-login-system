@@ -63,6 +63,18 @@ router.route('/profile').get((req, res, next) => {
 	});
 });
 
+
+router.route('/profile/user').get((req, res, next) => {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+	res.redirect('/');
+}, (req, res) => {
+	res.render('profile.hbs', {
+		username: req.user.username
+	});
+});
+
 function userIsAuthenticated(req, res, next) {
 	if (req.isAuthenticated()) {
 		res.redirect('/profile');
